@@ -3,27 +3,25 @@ const bot = new Discord.Client();
 
 const token = require('./tokens.json').token;
 
-console.log(token)
-
 const PREFIX = '!';
 
 bot.on('ready', () => {
     console.log("Bot is online")
 })
 
-bot.on('message', msg => {
-    let args = msg.content.substring(PREFIX.length).split(" ");
-
-    switch (args[0].toLowerCase) {
+bot.on('message', message => {
+    let args = message.content.substring(PREFIX.length).toLowerCase().split(" ");
+    switch (args[0]) {
         case 'ding': 
-            msg.channel.send('DONG!');
+            message.channel.send('DONG!');
             break;
     }
 })
 
-bot.on('message', msg => {
-    if (msg.content === "HELLO") {
-        msg.reply('Wenas noches')
+bot.on('message', message => {
+    msg = message.content.toString().toLowerCase();
+    if (msg === "hello") {
+        message.reply('Wenas noches')
     }
 })
 
