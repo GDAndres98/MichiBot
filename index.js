@@ -11,8 +11,11 @@ bot.on('ready', () => {
 bot.on('message', message => {
     let args = message.content.substring(PREFIX.length).toLowerCase().split(" ");
     switch (args[0]) {
-        case 'ding': 
-            message.channel.send('DONG!');
+        case 'ding':
+            if (args[1] === "dong")
+                message.channel.send('DING DONG! DING DONG!');
+            else
+                message.channel.send('DONG!');
             break;
     }
 })
