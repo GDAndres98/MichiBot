@@ -21,9 +21,18 @@ bot.on('message', message => {
 })
 
 bot.on('message', message => {
-    msg = message.content.toString().toLowerCase();
-    if (msg === "hello") {
+
+    msg = `${PREFIX}${message.content.toString().toLowerCase()}`;
+
+    if (msg === `${PREFIX}hello`) {
+        message.reply('Wen dia')
+    }
+    else if (msg === `${PREFIX}bye`) {
         message.reply('Wenas noches')
+    }
+    else if (message.content === `${PREFIX}sapo`) {
+        const sapito = new MessageAttachment('https://pngimage.net/wp-content/uploads/2018/06/sapo-png-1.png');
+        message.channel.send('David es un sapo alv.', sapito);
     }
 })
 
