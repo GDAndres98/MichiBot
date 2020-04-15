@@ -14,6 +14,31 @@ bot.on('ready', () => {
     console.log('Bot is ON');
 });
 
+function sapoFunction(args, message){
+    if (args[1] !== '' || args[1] !== undefined) {
+        const sapito = new MessageAttachment('https://pngimage.net/wp-content/uploads/2018/06/sapo-png-1.png');
+        mention = message.mentions.users;
+        const men = [];
+        mention.forEach(x => {
+            men.push(`<@!${x.id}>`);
+        });
+        text = men.length > 1 ? 'son unos sapos HPs' : men.length === 1 ? 'es un sapo HP' : '';
+
+        if (men.includes('<@!698803313931583539>'))
+            message.reply(`No me metas en tus asuntos, puta. :poop:`);
+        else if (text !== ''){
+            names = `${men.join(', ')}`;
+            x = names.lastIndexOf(",");
+            names = names.substring(0,x) + ' y' + names.substring(x+1);
+            message.channel.send(`${names} ${text}`, sapito);
+        }
+        else
+            message.channel.send('Debes mencionar a alguien, puta.');
+    } else {
+        message.channel.send('Debes mencionar a alguien, puta.');
+    }
+}
+
 
 bot.on('message', message => {
     hour = moment().utcOffset(-5).hour();
@@ -30,24 +55,7 @@ bot.on('message', message => {
                 break;
 
             case 'sapo':
-                if (args[1] !== '' || args[1] !== undefined) {
-                    const sapito = new MessageAttachment('https://pngimage.net/wp-content/uploads/2018/06/sapo-png-1.png');
-                    mention = message.mentions.users;
-                    const men = [];
-                    mention.forEach(x => {
-                        men.push(`<@!${x.id}>`);
-                    });
-                    text = men.length > 1 ? 'son unos sapos HPs' : men.length === 1 ? 'es un sapo HP' : '';
-
-                    if (men.includes('<@!698803313931583539>'))
-                        message.reply(`No me metas en tus asuntos, puta. :poop:`);
-                    else if (text !== '')
-                        message.channel.send(`${men.join(', ')} ${text}`, sapito);
-                    else
-                        message.channel.send('Debes mencionar a alguien, puta.');
-                } else {
-                    message.channel.send('Debes mencionar a alguien, puta.');
-                }
+                sapoFunction(args, message);
                 break;
 
             case 'own':
