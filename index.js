@@ -92,7 +92,11 @@ bot.on('message', message => {
                 break;
             
             case 'oper':
-                message.channel.send(eval(message.content.substring(PREFIX.length + 4)));
+                try {
+                    message.channel.send(eval(message.content.substring(PREFIX.length + 4)));
+                } catch (error) {
+                    message.channel.send("Ni para escribir una operación sirve, INUTIL.")
+                }
                 break;
             case 'hello':
                 if (hour == 0)
