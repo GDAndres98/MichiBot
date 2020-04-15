@@ -39,6 +39,27 @@ function sapoFunction(args, message){
     }
 }
 
+function sumFunction(args, message){
+    let suma = 0;
+    let index = 0;
+    for(let x in args){
+        if(x == 0) continue;
+        if(args[x] == "" || args[x] == undefined) continue;
+        if(!isNaN(args[x]))
+            suma += parseInt(args[x]);
+    }
+    /*
+    args.forEach((x, index) => {
+        if(index == 0) 
+            return;
+        console.log(x);
+        suma += parseInt(x);
+        //suma += x;
+    });
+    */
+    message.channel.send(`Suma = ${suma}`);
+
+}
 
 bot.on('message', message => {
     hour = moment().utcOffset(-5).hour();
@@ -66,7 +87,13 @@ bot.on('message', message => {
                     }
                 });
                 break;
-
+            case 'sumar':
+                sumFunction(args, message);
+                break;
+            
+            case 'oper':
+                message.channel.send(eval(message.content.substring(PREFIX.length + 4)));
+                break;
             case 'hello':
                 if (hour == 0)
                     message.reply('Feliz hoy!');
@@ -98,10 +125,12 @@ bot.on('message', message => {
                     .setTitle('Comandos aceptados')
                     .setColor(0x00CF2F)
                     .setDescription(`
-                        !hello - Te saludo
-                        !bye - Te despido
-                        !own - Gatitos para el estrés :3
-                        !sapo - Insulto a alguien por ti`);
+                        !hello  - Te saludo.
+                        !bye    - Te despido.
+                        !own    - Gatitos para el estrés :3.
+                        !sapo   - Insulto a alguien por ti.
+                        !sumar  - Sumo por ti.
+                        !oper   - Ejecuto cualquier operación aritmética.`);
                 message.channel.send(embed);
                 break;
         }
