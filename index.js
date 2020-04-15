@@ -95,11 +95,13 @@ bot.on('message', message => {
                 let res = "";
                 try {
                     res = eval(message.content.substring(PREFIX.length + 4));
+                    if (res !== '' || res == undefined)
+                        res = "OPERACION ARITMÉTICA... Por favor :3"
+
                 } catch (error) {
                     res = "Ni para escribir una operación sirve, INUTIL."
                 }
-                if (res !== '')
-                    message.channel.send(res)
+                message.channel.send(res)
                 break;
             case 'hello':
                 if (hour == 0)
