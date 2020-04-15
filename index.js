@@ -137,6 +137,9 @@ bot.on('message', message => {
                         !oper   - Ejecuto cualquier operación aritmética.`);
                 message.channel.send(embed);
                 break;
+            default:
+                message.channel.send("Ese comando no existe. !help para mas ayuda.");
+
         }
 });
 
