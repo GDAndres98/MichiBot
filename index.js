@@ -14,7 +14,7 @@ bot.on('ready', () => {
     console.log('Bot is ON');
 });
 
-function sapoFunction(args, message){
+function sapoFunction(args, message) {
     if (args[1] !== '' || args[1] !== undefined) {
         const sapito = new MessageAttachment('https://pngimage.net/wp-content/uploads/2018/06/sapo-png-1.png');
         mention = message.mentions.users;
@@ -26,10 +26,10 @@ function sapoFunction(args, message){
 
         if (men.includes('<@!698803313931583539>'))
             message.reply(`No me metas en tus asuntos, puta. :poop:`);
-        else if (text !== ''){
+        else if (text !== '') {
             names = `${men.join(', ')}`;
             x = names.lastIndexOf(",");
-            names = names.substring(0,x) + ' y' + names.substring(x+1);
+            names = names.substring(0, x) + ' y' + names.substring(x + 1);
             message.channel.send(`${names} ${text}`, sapito);
         }
         else
@@ -39,13 +39,13 @@ function sapoFunction(args, message){
     }
 }
 
-function sumFunction(args, message){
+function sumFunction(args, message) {
     let suma = 0;
     let index = 0;
-    for(let x in args){
-        if(x == 0) continue;
-        if(args[x] == "" || args[x] == undefined) continue;
-        if(!isNaN(args[x]))
+    for (let x in args) {
+        if (x == 0) continue;
+        if (args[x] == "" || args[x] == undefined) continue;
+        if (!isNaN(args[x]))
             suma += parseInt(args[x]);
     }
     /*
@@ -90,15 +90,15 @@ bot.on('message', message => {
             case 'sumar':
                 sumFunction(args, message);
                 break;
-            
+
             case 'oper':
                 let res = "";
                 try {
                     res = eval(message.content.substring(PREFIX.length + 4));
                 } catch (error) {
-                    "Ni para escribir una operación sirve, INUTIL."
+                    res = "Ni para escribir una operación sirve, INUTIL."
                 }
-                if(res!=='')
+                if (res !== '')
                     message.channel.send(res)
                 break;
             case 'hello':
