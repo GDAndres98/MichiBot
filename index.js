@@ -109,7 +109,7 @@ bot.on('message', message => {
                 else if (hour < 12)
                     message.reply('Wenos dias!');
                 else if (hour < 18)
-                    message.reply('Wenos TARDES!');
+                    message.reply('Wenas TARDES!');
                 else
                     message.reply('TARDE, COMO SIEMPRE...');
                 break;
