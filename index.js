@@ -99,10 +99,4 @@ bot.on('message', message => {
         }
 });
 
-
-bot.on('message', message => {
-    msg = message.content.substring(PREFIX.length).toLowerCase();
-
-});
-
 bot.login(process.env.BOT_TOKEN);
