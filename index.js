@@ -28,8 +28,10 @@ function sapoFunction(args, message){
             message.reply(`No me metas en tus asuntos, puta. :poop:`);
         else if (text !== ''){
             names = `${men.join(', ')}`;
-            x = names.lastIndexOf(",");
-            names = names.substring(0,x) + ' y' + names.substring(x+1);
+            if(men.length > 1){
+                x = names.lastIndexOf(",");
+                names = names.substring(0,x) + ' y' + names.substring(x+1);
+            }
             message.channel.send(`${names} ${text}`, sapito);
         }
         else
