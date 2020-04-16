@@ -49,13 +49,13 @@ function sumFunction(args, message) {
   let suma = 0;
   // let index = 0
   for (let x in args) {
-    if (x == 0) continue;
-    if (args[x] == '' || args[x] == undefined) continue;
+    if (x === 0) continue;
+    if (args[x] === '' || args[x] === undefined) continue;
     if (!isNaN(args[x])) suma += parseInt(args[x]);
   }
   /*
       args.forEach((x, index) => {
-          if(index == 0) 
+          if(index === 0) 
               return;
           console.log(x);
           suma += parseInt(x);
@@ -84,7 +84,7 @@ bot.on('message', (message) => {
 
     case 'own':
       request(urlCatAPI, options, (error, res, body) => {
-        if (!error && res.statusCode == 200) {
+        if (!error && res.statusCode === 200) {
           const cat = new MessageAttachment(body[0].url);
           message.channel.send(cat);
         }
@@ -99,7 +99,7 @@ bot.on('message', (message) => {
       var res = '';
       try {
         res = eval(message.content.substring(PREFIX.length + 4));
-        if (res !== '' || res == undefined)
+        if (res !== '' || res === undefined)
           res = 'OPERACION ARITMÉTICA... Por favor :3';
       } catch (error) {
         res = 'Ni para escribir una operación sirve, INUTIL.';
@@ -108,7 +108,7 @@ bot.on('message', (message) => {
       break;
 
     case 'hello':
-      if (hour == 0) message.reply('Feliz hoy!');
+      if (hour === 0) message.reply('Feliz hoy!');
       if (hour < 5) message.reply('A dormir, vag@ de mierda >:v');
       else if (hour < 12) message.reply('Wenos dias!');
       else if (hour < 18) message.reply('Wenas TARDES!');
@@ -116,7 +116,7 @@ bot.on('message', (message) => {
       break;
 
     case 'bye':
-      if (hour == 0) message.reply('Feliz hoy!');
+      if (hour === 0) message.reply('Feliz hoy!');
       if (hour < 5) message.reply('Porfin, maldit@ vag@');
       else if (hour < 12) message.reply('Pero apenas está amaneciendo :"v');
       else if (hour < 18) message.reply('Wena tarde mij@');
@@ -132,7 +132,9 @@ bot.on('message', (message) => {
             !own    - Gatitos para el estrés.
             !sapo   - Insulto a alguien por ti.
             !sumar  - Sumo por ti.
-            !oper   - Ejecuto cualquier operación aritmética.`);
+            !oper   - Ejecuto cualquier operación aritmética.
+            
+            Test.`);
       message.channel.send(embed);
       break;
 
