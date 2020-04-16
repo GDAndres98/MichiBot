@@ -4,7 +4,8 @@
   "description": "Bot para servidor de Discord",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "npx prettier --single-quote --trailing-comma all --write *.js *.json && npx eslint --fix *.js"
   },
   "author": "PoliTeam",
   "license": "ISC",
@@ -13,5 +14,9 @@
     "dotenv": "^8.2.0",
     "moment": "^2.24.0",
     "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "prettier": "^2.0.4"
   }
 }
