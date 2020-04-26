@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Client, MessageAttachment, MessageEmbed } = require('discord.js');
 const request = require('request');
 const moment = require('moment');
+const covid = require('./js/covid.js');
 
 const bot = new Client();
 const PREFIX = '!';
@@ -10,11 +11,11 @@ const urlCatAPI = 'https://api.thecatapi.com/v1/images/search';
 const options = { json: true };
 
 bot.on('ready', () => {
-  console.log('Bot is ON');
+  console.log('On');
 });
 
 function sapoFunction(args, message) {
-  if (typeof args[1] !== undefined) {
+  if (args[1]) {
     const sapito = new MessageAttachment(
       'https://pngimage.net/wp-content/uploads/2018/06/sapo-png-1.png',
     );
@@ -54,14 +55,14 @@ function sumFunction(args, message) {
     if (!isNaN(args[x])) suma += parseInt(args[x]);
   }
   /*
-      args.forEach((x, index) => {
-          if(index === 0) 
-              return;
-          console.log(x);
-          suma += parseInt(x);
-          //suma += x;
-      });
-      */
+	args.forEach((x, index) => {
+		if(index === 0)
+			return;
+		console.log(x);
+			suma += parseInt(x);
+			//suma += x;
+	});
+	*/
   message.channel.send(`Suma = ${suma}`);
 }
 
@@ -127,20 +128,38 @@ bot.on('message', (message) => {
       var embed = new MessageEmbed()
         .setTitle('Comandos aceptados')
         .setColor(0x00cf2f).setDescription(`
-            !hello  - Te saludo.
-            !bye    - Te despido.
-            !own    - Gatitos para el estrés.
-            !sapo   - Insulto a alguien por ti.
-            !sumar  - Sumo por ti.
-            !oper   - Ejecuto cualquier operación aritmética.
-            
-            Test.`);
+          **!hello**  - Te saludo
+          **!bye**    - Te despido
+          **!own**    - Gatitos para el estrés
+          **!sapo**   - Insulto a alguien por ti
+          **!sumar**  - Sumo por ti
+					**!oper**   - Ejecuto cualquier operación aritmética
+					
+					Covid:
+					**!covid-col** - Reporte casos Colombia
+					**!covid-global** - Reporte casos en el mundo
+					`);
       message.channel.send(embed);
       break;
 
+    case 'covid-col':
+      covid.col.then((res) => {
+        message.channel.send(res);
+      });
+      break;
+
+    case 'covid-global':
+      covid.global.then((res) => {
+        message.channel.send(res);
+      });
+      break;
+
     default:
-      message.channel.send('Ese comando no existe. !help para mas ayuda.');
+      message.channel.send('Ese comando no existe.');
+      message.channel.send('!help');
     }
 });
 
 bot.login(process.env.BOT_TOKEN);
+
+// Antes de hacer un commit ejecutar 'npm run lint' please :3

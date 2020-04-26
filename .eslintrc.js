@@ -16,7 +16,7 @@ module.exports = {
   rules: {
     semi: ['error', 'always'],
     quotes: ['error', 'single', { allowTemplateLiterals: true }],
-    indent: ['error', 2, { VariableDeclarator: { var: 2, let: 2, const: 3 } }],
+    indent: ['warn', 2, { VariableDeclarator: { var: 2, let: 2, const: 3 } }],
     'key-spacing': [
       'error',
       {
