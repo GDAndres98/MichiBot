@@ -2,7 +2,7 @@ require('dotenv').config();
 const { Client, MessageAttachment, MessageEmbed } = require('discord.js');
 const request = require('request');
 const moment = require('moment');
-const covid = require('./js/covid.js');
+// const covid = require('./js/covid.js');
 
 const bot = new Client();
 const PREFIX = '!';
@@ -143,15 +143,17 @@ bot.on('message', (message) => {
       break;
 
     case 'covid-col':
-      covid.col.then((res) => {
-        message.channel.send(res);
-      });
+      // covid.col.then((res) => {
+      //   message.channel.send(res);
+      // });
+      message.channel.send('En mantenimiento...');
       break;
 
     case 'covid-global':
-      covid.global.then((res) => {
-        message.channel.send(res);
-      });
+      // covid.global.then((res) => {
+      //   message.channel.send(res);
+      // });
+      message.channel.send('En mantenimiento...');
       break;
 
     default:
