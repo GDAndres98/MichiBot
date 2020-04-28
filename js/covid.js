@@ -8,7 +8,7 @@ const urlDate = 'https://covidapi.info/api/v1/latest-date';
 const options = { json: true };
 
 // Fecha actual
-const date = new Promise((res) => {
+let date = new Promise((res) => {
   request(urlDate, options, (error, response, body) => {
     if (!error && response.statusCode === 200) {
       res(body);
@@ -17,7 +17,7 @@ const date = new Promise((res) => {
 });
 
 // Reporte global
-const global = new Promise((res) => {
+let global = new Promise((res) => {
   request(urlGlobal, options, (error, response, body) => {
     if (!error && response.statusCode === 200) {
       const report = body.result;
@@ -37,10 +37,12 @@ const global = new Promise((res) => {
       res(embed);
     }
   });
+}).finally(() => {
+  global = null;
 });
 
 // Reporte Colombia
-const col = new Promise((res) => {
+let col = new Promise((res) => {
   request(urlCol, options, (error, response, body) => {
     if (!error && response.statusCode === 200) {
       date.then((currentDate) => {
@@ -62,6 +64,8 @@ const col = new Promise((res) => {
       });
     }
   });
+}).finally(() => {
+  col = null;
 });
 
 // Exportar
