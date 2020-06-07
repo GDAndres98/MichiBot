@@ -156,6 +156,9 @@ bot.on('message', (message) => {
       message.channel.send('En mantenimiento...');
       break;
 
+    case 'nice':
+        message.channel.send('Que buen dato crack.');
+        break;
     
 
     default:
