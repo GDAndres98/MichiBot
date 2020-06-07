@@ -144,6 +144,9 @@ bot.on('message', message => {
                         !oper   - Ejecuto cualquier operación aritmética.`);
                 message.channel.send(embed);
                 break;
+            case 'nice':
+                message.channel.send("Que buen dato crack.");
+                break;
             default:
                 message.channel.send("Ese comando no existe. !help para mas ayuda.");
 
