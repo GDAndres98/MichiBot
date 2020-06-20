@@ -2,7 +2,7 @@ require('dotenv').config();
 const { Client, MessageAttachment, MessageEmbed } = require('discord.js');
 const request = require('request');
 const moment = require('moment');
-// const covid = require('./js/covid.js');
+let covid = require('./js/covid.js');
 
 const bot = new Client();
 const PREFIX = '!';
@@ -100,8 +100,7 @@ bot.on('message', (message) => {
       var res = '';
       try {
         res = eval(message.content.substring(PREFIX.length + 4));
-        if (res !== '' || res === undefined)
-          res = 'OPERACION ARITMÉTICA... Por favor :3';
+        if (!res) res = 'No puedo traducir eso, prro.';
       } catch (error) {
         res = 'Ni para escribir una operación sirve, INUTIL.';
       }
@@ -133,7 +132,7 @@ bot.on('message', (message) => {
           **!own**    - Gatitos para el estrés
           **!sapo**   - Insulto a alguien por ti
           **!sumar**  - Sumo por ti
-					**!oper**   - Ejecuto cualquier operación aritmética
+					**!oper**   - Ejecuto cualquier operación aritmética y algo más, jeje
 					
 					Covid:
 					**!covid-col** - Reporte casos Colombia
@@ -143,17 +142,17 @@ bot.on('message', (message) => {
       break;
 
     case 'covid-col':
-      // covid.col.then((res) => {
-      //   message.channel.send(res);
-      // });
-      message.channel.send('En mantenimiento...');
+      covid.col.then((res) => {
+        message.channel.send(res);
+      });
+      // message.channel.send('En mantenimiento...');
       break;
 
     case 'covid-global':
-      // covid.global.then((res) => {
-      //   message.channel.send(res);
-      // });
-      message.channel.send('En mantenimiento...');
+      covid.global.then((res) => {
+        message.channel.send(res);
+      });
+      // message.channel.send('En mantenimiento...');
       break;
 
     default:

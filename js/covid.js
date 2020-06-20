@@ -37,8 +37,6 @@ let global = new Promise((res) => {
       res(embed);
     }
   });
-}).finally(() => {
-  global = null;
 });
 
 // Reporte Colombia
@@ -64,8 +62,6 @@ let col = new Promise((res) => {
       });
     }
   });
-}).finally(() => {
-  col = null;
 });
 
 // Exportar
