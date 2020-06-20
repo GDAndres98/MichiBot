@@ -156,9 +156,8 @@ bot.on('message', (message) => {
       break;
 
     case 'nice':
-        message.channel.send('Que buen dato crack.');
-        break;
-    
+      message.channel.send('Que buen dato crack.');
+      break;
 
     default:
       message.channel.send('Ese comando no existe.');
