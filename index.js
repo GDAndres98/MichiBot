@@ -140,7 +140,7 @@ bot.on('message', (message) => {
           **!bye**    - Te despido
           **!own**    - Gatitos para el estrés
           **!sapo**   - Insulto a alguien por ti
-          **!heroe**  - Te muestro un heroe para que salve tu dia
+          **!super**  - Te muestro un heroe para que salve tu dia
           **!sumar**  - Sumo por ti
 					**!oper**   - Ejecuto cualquier operación aritmética y algo más, jeje
 					
@@ -167,10 +167,6 @@ bot.on('message', (message) => {
 
     case 'nice':
       message.channel.send('Que buen dato crack.');
-      break;
-
-    case 'prueba':
-      message.channel.send('This prueba');
       break;
 
     default:
