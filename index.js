@@ -140,7 +140,7 @@ bot.on('message', (message) => {
           **!bye**    - Te despido
           **!own**    - Gatitos para el estrés
           **!sapo**   - Insulto a alguien por ti
-          **!super**  - Te muestro un heroe par que salve tu dia
+          **!heroe**  - Te muestro un heroe para que salve tu dia
           **!sumar**  - Sumo por ti
 					**!oper**   - Ejecuto cualquier operación aritmética y algo más, jeje
 					
