@@ -3,6 +3,7 @@ const { Client, MessageAttachment, MessageEmbed } = require('discord.js');
 const request = require('request');
 const moment = require('moment');
 let covid = require('./js/covid.js');
+let superhero = require('./js/superhero.js');
 
 const bot = new Client();
 const PREFIX = '!';
@@ -92,6 +93,14 @@ bot.on('message', (message) => {
       });
       break;
 
+    case 'super':
+      var rand = (Math.floor(Math.random()*731)+1);
+      superhero.getHero(rand).then((res) => {
+        message.channel.send(res);
+      })
+        .catch();
+      break;
+
     case 'sumar':
       sumFunction(args, message);
       break;
@@ -131,6 +140,7 @@ bot.on('message', (message) => {
           **!bye**    - Te despido
           **!own**    - Gatitos para el estrés
           **!sapo**   - Insulto a alguien por ti
+          **!super**  - Te muestro un heroe par que salve tu dia
           **!sumar**  - Sumo por ti
 					**!oper**   - Ejecuto cualquier operación aritmética y algo más, jeje
 					
@@ -157,6 +167,10 @@ bot.on('message', (message) => {
 
     case 'nice':
       message.channel.send('Que buen dato crack.');
+      break;
+
+    case 'prueba':
+      message.channel.send('This prueba');
       break;
 
     default:
