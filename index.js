@@ -3,7 +3,7 @@ const { Client, MessageAttachment, MessageEmbed } = require('discord.js');
 const request = require('request');
 const moment = require('moment');
 let covid = require('./js/covid.js');
-let superhero = require('./js/superhero.js');
+let varios = require('./js/varios.js');
 
 const bot = new Client();
 const PREFIX = '!';
@@ -95,7 +95,7 @@ bot.on('message', (message) => {
 
     case 'super':
       var rand = (Math.floor(Math.random()*731)+1);
-      superhero.getHero(rand).then((res) => {
+      varios.getHero(rand).then((res) => {
         message.channel.send(res);
       })
         .catch();
@@ -114,6 +114,13 @@ bot.on('message', (message) => {
         res = 'Ni para escribir una operación sirve, INUTIL.';
       }
       message.channel.send(res);
+      break;
+
+    case 'insulto':
+      var numInsulto = (Math.floor(Math.random()*879)+1);
+      varios.insulto(numInsulto).then((res) =>{
+        message.channel.send('Eres un ' + res);
+      });
       break;
 
     case 'hello':
@@ -142,7 +149,8 @@ bot.on('message', (message) => {
           **!sapo**   - Insulto a alguien por ti
           **!super**  - Te muestro un heroe para que salve tu dia
           **!sumar**  - Sumo por ti
-					**!oper**   - Ejecuto cualquier operación aritmética y algo más, jeje
+          **!oper**   - Ejecuto cualquier operación aritmética y algo más, jeje
+          **!insulto**- Genero un insulto 
 					
 					Covid:
 					**!covid-col** - Reporte casos Colombia
