@@ -149,13 +149,13 @@ bot.on('message', (message) => {
       break;
 
     case 'covid-col':
-      covid.col.then((res) => {
+      covid.col().then((res) => {
         message.channel.send(res);
       });
       break;
 
     case 'covid-global':
-      covid.global.then((res) => {
+      covid.global().then((res) => {
         message.channel.send(res);
       });
       break;
