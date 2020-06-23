@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { Client, MessageAttachment, MessageEmbed } = require('discord.js');
-const request = require('request');
+const axios = require('axios');
 const moment = require('moment');
 let covid = require('./js/covid.js');
 let varios = require('./js/varios.js');
@@ -9,7 +9,6 @@ const bot = new Client();
 const PREFIX = '!';
 
 const urlCatAPI = 'https://api.thecatapi.com/v1/images/search';
-const options = { json: true };
 
 bot.on('ready', () => {
   console.log('On');
@@ -49,21 +48,11 @@ function sapoFunction(args, message) {
 
 function sumFunction(args, message) {
   let suma = 0;
-  // let index = 0
   for (let x in args) {
     if (x === 0) continue;
     if (args[x] === '' || args[x] === undefined) continue;
     if (!isNaN(args[x])) suma += parseInt(args[x]);
   }
-  /*
-	args.forEach((x, index) => {
-		if(index === 0)
-			return;
-		console.log(x);
-			suma += parseInt(x);
-			//suma += x;
-	});
-	*/
   message.channel.send(`Suma = ${suma}`);
 }
 
@@ -85,19 +74,19 @@ bot.on('message', (message) => {
       break;
 
     case 'own':
-      request(urlCatAPI, options, (error, res, body) => {
-        if (!error && res.statusCode === 200) {
-          const cat = new MessageAttachment(body[0].url);
-          message.channel.send(cat);
-        }
+      axios.get(urlCatAPI).then((response) => {
+        const cat = new MessageAttachment(response.data[0].url);
+        message.channel.send(cat);
       });
       break;
 
     case 'super':
-      var rand = (Math.floor(Math.random()*731)+1);
-      varios.getHero(rand).then((res) => {
-        message.channel.send(res);
-      })
+      var rand = Math.floor(Math.random() * 731) + 1;
+      varios
+        .getHero(rand)
+        .then((res) => {
+          message.channel.send(res);
+        })
         .catch();
       break;
 
@@ -117,8 +106,8 @@ bot.on('message', (message) => {
       break;
 
     case 'insulto':
-      var numInsulto = (Math.floor(Math.random()*879)+1);
-      varios.insulto(numInsulto).then((res) =>{
+      var numInsulto = Math.floor(Math.random() * 879) + 1;
+      varios.insulto(numInsulto).then((res) => {
         message.channel.send('Eres un ' + res);
       });
       break;
@@ -163,23 +152,22 @@ bot.on('message', (message) => {
       covid.col.then((res) => {
         message.channel.send(res);
       });
-      // message.channel.send('En mantenimiento...');
       break;
 
     case 'covid-global':
       covid.global.then((res) => {
         message.channel.send(res);
       });
-      // message.channel.send('En mantenimiento...');
       break;
 
     case 'nice':
-      message.channel.send('Que buen dato crack.');
+      message.channel.send('Gracias :heart: xd');
       break;
 
     default:
-      message.channel.send('Ese comando no existe.');
-      message.channel.send('!help');
+      message.channel.send(
+        'Ese comando no existe - **!help** para mas ayuda.',
+      );
     }
 });
 
