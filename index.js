@@ -46,6 +46,30 @@ function sapoFunction(args, message) {
   }
 }
 
+async function insulto(args, message){
+  if (args[1]) {
+    const mention = message.mentions.users;
+    const men = [];
+    mention.forEach((x) => { men.push(`<@!${x.id}>`);});
+    var resp = '';
+    for (const i in men) {
+      resp = resp + men[i] + ' es un ';
+      await varios.getInsult()
+        .then((resolve) => {
+          resp = resp + `${resolve}`;
+        });
+      if(i+1 <= men.length) resp = resp + ' y ';
+    }
+    console.log(resp);
+    message.channel.send(resp);
+  }
+  else{
+    varios.getInsult().then((resolve) => {
+      message.channel.send('Usted es un ' + resolve + ', no etiquetó a nadie >:v');
+    });
+  }
+}
+
 function sumFunction(args, message) {
   let suma = 0;
   for (let x in args) {
@@ -81,9 +105,7 @@ bot.on('message', (message) => {
       break;
 
     case 'super':
-      var rand = Math.floor(Math.random() * 731) + 1;
-      varios
-        .getHero(rand)
+      varios.getHero()
         .then((res) => {
           message.channel.send(res);
         })
@@ -106,10 +128,7 @@ bot.on('message', (message) => {
       break;
 
     case 'insulto':
-      var numInsulto = Math.floor(Math.random() * 879) + 1;
-      varios.insulto(numInsulto).then((res) => {
-        message.channel.send('Eres un ' + res);
-      });
+      insulto(args, message);
       break;
 
     case 'hello':
