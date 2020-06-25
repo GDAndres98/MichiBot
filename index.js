@@ -58,7 +58,7 @@ async function insulto(args, message){
         .then((resolve) => {
           resp = resp + `${resolve}`;
         });
-      if(i+1 <= men.length) resp = resp + ' y ';
+      if(i+1 < men.length) resp = resp + ' y ';
     }
     console.log(resp);
     message.channel.send(resp);
