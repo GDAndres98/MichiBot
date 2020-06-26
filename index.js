@@ -180,7 +180,7 @@ bot.on('message', (message) => {
       break;
 
     case 'nice':
-      message.channel.send('Gracias :heart: xd');
+      message.channel.send('Que buen dato crack.');
       break;
 
     default:
