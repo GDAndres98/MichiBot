@@ -147,6 +147,10 @@ bot.on('message', (message) => {
       else message.reply('Wenas nochesitas!');
       break;
 
+    case 'sad':
+      var sadCat = new MessageAttachment('https://i.pinimg.com/236x/30/3f/02/303f027d32f2eeeeb596ef77be4e10f0.jpg');
+      message.channel.send('Pvta que sad', sadCat);
+      break;
     case 'help':
       var embed = new MessageEmbed()
         .setTitle('Comandos aceptados')
@@ -158,7 +162,8 @@ bot.on('message', (message) => {
           **!super**  - Te muestro un heroe para que salve tu dia
           **!sumar**  - Sumo por ti
           **!oper**   - Ejecuto cualquier operación aritmética y algo más, jeje
-          **!insulto**- Genero un insulto 
+          **!insulto**- Insulto a alguien por ti x2
+          **!sad**    - La hora sad
 					
 					Covid:
 					**!covid-col** - Reporte casos Colombia
