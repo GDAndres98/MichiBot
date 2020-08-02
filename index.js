@@ -6,7 +6,7 @@ let covid = require('./js/covid.js');
 let varios = require('./js/varios.js');
 
 const bot = new Client();
-const PREFIX = '!';
+const PREFIX = '¿';
 
 const urlCatAPI = 'https://api.thecatapi.com/v1/images/search';
 
@@ -190,7 +190,7 @@ bot.on('message', (message) => {
 
     default:
       message.channel.send(
-        'Ese comando no existe - **!help** para mas ayuda.',
+        'Ese comando no existe - **¿help** para mas ayuda.',
       );
     }
 });
