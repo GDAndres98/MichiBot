@@ -155,19 +155,19 @@ bot.on('message', (message) => {
       var embed = new MessageEmbed()
         .setTitle('Comandos aceptados')
         .setColor(0x00cf2f).setDescription(`
-          **!hello**  - Te saludo
-          **!bye**    - Te despido
-          **!own**    - Gatitos para el estrés
-          **!sapo**   - Insulto a alguien por ti
-          **!super**  - Te muestro un heroe para que salve tu dia
-          **!sumar**  - Sumo por ti
-          **!oper**   - Ejecuto cualquier operación aritmética y algo más, jeje
-          **!insulto**- Insulto a alguien por ti x2
-          **!sad**    - La hora sad
+          **¿hello**  - Te saludo
+          **¿bye**    - Te despido
+          **¿own**    - Gatitos para el estrés
+          **¿sapo**   - Insulto a alguien por ti
+          **¿super**  - Te muestro un heroe para que salve tu dia
+          **¿sumar**  - Sumo por ti
+          **¿oper**   - Ejecuto cualquier operación aritmética y algo más, jeje
+          **¿insulto**- Insulto a alguien por ti x2
+          **¿sad**    - La hora sad
 					
 					Covid:
-					**!covid-col** - Reporte casos Colombia
-					**!covid-global** - Reporte casos en el mundo
+					**¿covid-col** - Reporte casos Colombia
+					**¿covid-global** - Reporte casos en el mundo
 					`);
       message.channel.send(embed);
       break;
