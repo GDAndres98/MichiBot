@@ -1,20 +1,19 @@
 const axios = require('axios');
 const { MessageEmbed } = require('discord.js');
- 
 
 const fetchHero = async (rand) => {
-  try{
+  try {
     const urlSuper = 'https://superheroapi.com/api/103623524740324/' + rand;
     const response = await axios.get(urlSuper);
     return response.data;
-  } catch(e){
+  } catch (e) {
     console.log(e);
   }
 };
-const getHero = async() =>{
+const getHero = async () => {
   var random = Math.floor(Math.random() * 879) + 1;
   var hero = await fetchHero(random);
-  if(hero.response === 'success'){
+  if (hero.response === 'success') {
     let embed = new MessageEmbed()
       .setTitle(hero.name)
       .setColor(0x3498db)
@@ -31,18 +30,18 @@ const getHero = async() =>{
   }
 };
 
-
-let fetchInsult = async () =>{
-  try{
-    const urlInsultos = 'https://raw.githubusercontent.com/Somelx/Insultos/master/diccionario.txt';
+let fetchInsult = async () => {
+  try {
+    const urlInsultos =
+      'https://raw.githubusercontent.com/Somelx/Insultos/master/diccionario.txt';
     const response = await axios.get(urlInsultos);
     return response.data;
-  } catch(e){
+  } catch (e) {
     console.log(e);
   }
 };
 
-let getInsult = async() =>{
+let getInsult = async () => {
   var insult = await fetchInsult();
   var random = Math.floor(Math.random() * 879) + 1;
   return insult.split('\n')[random];

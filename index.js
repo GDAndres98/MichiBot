@@ -50,22 +50,24 @@ async function insulto(args, message) {
   if (args[1]) {
     const mention = message.mentions.users;
     const men = [];
-    mention.forEach((x) => { men.push(`<@!${x.id}>`); });
+    mention.forEach((x) => {
+      men.push(`<@!${x.id}>`);
+    });
     var resp = '';
     for (const i in men) {
       resp = resp + men[i] + ' es un ';
-      await varios.getInsult()
-        .then((resolve) => {
-          resp = resp + `${resolve}`;
-        });
+      await varios.getInsult().then((resolve) => {
+        resp = resp + `${resolve}`;
+      });
       if (i + 1 < men.length) resp = resp + ' y ';
     }
     console.log(resp);
     message.channel.send(resp);
-  }
-  else {
+  } else {
     varios.getInsult().then((resolve) => {
-      message.channel.send('Usted es un ' + resolve + ', no etiquetó a nadie >:v');
+      message.channel.send(
+        'Usted es un ' + resolve + ', no etiquetó a nadie >:v',
+      );
     });
   }
 }
@@ -88,110 +90,151 @@ bot.on('message', (message) => {
     .split(' ');
   if (message.content[0] === PREFIX)
     switch (args[0]) {
-      case 'ding':
-        if (args[1] === 'dong') message.channel.send('DING DONG! DING DONG!');
-        else message.channel.send('DONG!');
-        break;
+    case 'ding':
+      if (args[1] === 'dong') message.channel.send('DING DONG! DING DONG!');
+      else message.channel.send('DONG!');
+      break;
 
-      case 'sapo':
-        sapoFunction(args, message);
-        break;
+    case 'sapo':
+      sapoFunction(args, message);
+      break;
 
-      case 'own':
-        axios.get(urlCatAPI).then((response) => {
-          const cat = new MessageAttachment(response.data[0].url);
-          message.channel.send(cat);
-        });
-        break;
+    case 'own':
+      axios.get(urlCatAPI).then((response) => {
+        const cat = new MessageAttachment(response.data[0].url);
+        message.channel.send(cat);
+      });
+      break;
 
-      case 'super':
-        varios.getHero()
-          .then((res) => {
-            message.channel.send(res);
-          })
-          .catch();
-        break;
+    case 'super':
+      varios
+        .getHero()
+        .then((res) => {
+          message.channel.send(res);
+        })
+        .catch();
+      break;
 
-      case 'sumar':
-        sumFunction(args, message);
-        break;
+    case 'sumar':
+      sumFunction(args, message);
+      break;
 
-      case 'oper':
-        var res = '';
-        try {
-          res = eval(message.content.substring(PREFIX.length + 4));
-          if (!res) res = 'No puedo traducir eso, prro.';
-        } catch (error) {
-          res = 'Ni para escribir una operación sirve, INUTIL.';
-        }
-        message.channel.send(res);
-        break;
+    case 'oper':
+      var res = '';
+      try {
+        res = eval(message.content.substring(PREFIX.length + 4));
+        if (!res) res = 'No puedo traducir eso, prro.';
+      } catch (error) {
+        res = 'Ni para escribir una operación sirve, INUTIL.';
+      }
+      message.channel.send(res);
+      break;
 
-      case 'insulto':
-        insulto(args, message);
-        break;
+    case 'insulto':
+      insulto(args, message);
+      break;
 
-      case 'hello':
-        if (hour === 0) message.reply('Feliz hoy!');
-        if (hour < 5) message.reply('A dormir, vag@ de mierda >:v');
-        else if (hour < 12) message.reply('Wenos dias!');
-        else if (hour < 18) message.reply('Wenas TARDES!');
-        else message.reply('TARDE, COMO SIEMPRE...');
-        break;
+    case 'hello':
+      if (hour === 0) message.reply('Feliz hoy!');
+      if (hour < 5) message.reply('A dormir, vag@ de mierda >:v');
+      else if (hour < 12) message.reply('Wenos dias!');
+      else if (hour < 18) message.reply('Wenas TARDES!');
+      else message.reply('TARDE, COMO SIEMPRE...');
+      break;
 
-      case 'bye':
-        if (hour === 0) message.reply('Feliz hoy!');
-        if (hour < 5) message.reply('Porfin, maldit@ vag@');
-        else if (hour < 12) message.reply('Pero apenas está amaneciendo :"v');
-        else if (hour < 18) message.reply('Wena tarde mij@');
-        else message.reply('Wenas nochesitas!');
-        break;
+    case 'bye':
+      if (hour === 0) message.reply('Feliz hoy!');
+      if (hour < 5) message.reply('Porfin, maldit@ vag@');
+      else if (hour < 12) message.reply('Pero apenas está amaneciendo :"v');
+      else if (hour < 18) message.reply('Wena tarde mij@');
+      else message.reply('Wenas nochesitas!');
+      break;
 
-      case 'sad':
-        var sadCat = new MessageAttachment('https://i.pinimg.com/236x/30/3f/02/303f027d32f2eeeeb596ef77be4e10f0.jpg');
-        message.channel.send('Pvta que sad', sadCat);
-        break;
-      case 'help':
-        var embed = new MessageEmbed()
-          .setTitle('Comandos aceptados')
-          .setColor(0x00cf2f).setDescription(`
-          **`+ PREFIX + `hello**  - Te saludo
-          **`+ PREFIX + `bye**    - Te despido
-          **`+ PREFIX + `own**    - Gatitos para el estrés
-          **`+ PREFIX + `sapo**   - Insulto a alguien por ti
-          **`+ PREFIX + `super**  - Te muestro un heroe para que salve tu dia
-          **`+ PREFIX + `sumar**  - Sumo por ti
-          **`+ PREFIX + `oper**   - Ejecuto cualquier operación aritmética y algo más, jeje
-          **`+ PREFIX + `insulto**- Insulto a alguien por ti x2
-          **`+ PREFIX + `sad**    - La hora sad
+    case 'sad':
+      var sadCat = new MessageAttachment(
+        'https://i.pinimg.com/236x/30/3f/02/303f027d32f2eeeeb596ef77be4e10f0.jpg',
+      );
+      message.channel.send('Pvta que sad', sadCat);
+      break;
+    case 'help':
+      var embed = new MessageEmbed()
+        .setTitle('Comandos aceptados')
+        .setColor(0x00cf2f)
+        .setDescription(
+          `
+          **` +
+              PREFIX +
+              `hello**  - Te saludo
+          **` +
+              PREFIX +
+              `bye**    - Te despido
+          **` +
+              PREFIX +
+              `own**    - Gatitos para el estrés
+          **` +
+              PREFIX +
+              `sapo**   - Insulto a alguien por ti
+          **` +
+              PREFIX +
+              `super**  - Te muestro un heroe para que salve tu dia
+          **` +
+              PREFIX +
+              `sumar**  - Sumo por ti
+          **` +
+              PREFIX +
+              `oper**   - Ejecuto cualquier operación aritmética y algo más, jeje
+          **` +
+              PREFIX +
+              `insulto**- Insulto a alguien por ti x2
+          **` +
+              PREFIX +
+              `sad**    - La hora sad
 					
 					Covid:
-					**`+ PREFIX + `covid-col** - Reporte casos Colombia
-					**`+ PREFIX + `covid-global** - Reporte casos en el mundo
-					`);
-        message.channel.send(embed);
-        break;
-
-      case 'covid-col':
-        covid.col().then((res) => {
-          message.channel.send(res);
-        });
-        break;
-
-      case 'covid-global':
-        covid.global().then((res) => {
-          message.channel.send(res);
-        });
-        break;
-
-      case 'nice':
-        message.channel.send('Que buen dato crack.');
-        break;
-
-      default:
-        message.channel.send(
-          'Ese comando no existe - **¿help** para mas ayuda.',
+					**` +
+              PREFIX +
+              `covid-col** - Reporte casos Colombia
+					**` +
+              PREFIX +
+              `covid-global** - Reporte casos en el mundo
+					`,
         );
+      message.channel.send(embed);
+      break;
+
+    case 'covid-col':
+      covid.col().then((res) => {
+        message.channel.send(res);
+      });
+      break;
+
+    case 'covid-global':
+      covid.global().then((res) => {
+        message.channel.send(res);
+      });
+      break;
+
+    case 'nice':
+      message.channel.send('Que buen dato crack.');
+      break;
+
+    case 'delms':
+      if (message.member.hasPermission('ADMINISTRATOR')) {
+        if (args[1]) {
+          message.channel
+            .bulkDelete(args[1], true)
+            .then()
+            .catch((err) => message.channel.send(`Algo salió mal, ${err}`));
+        } else {
+          message.channel.send(`¿Cuantos mensajes quiere borrar, perro?`);
+        }
+      }
+      break;
+
+    default:
+      message.channel.send(
+        'Ese comando no existe - **¿help** para mas ayuda.',
+      );
     }
 });
 
